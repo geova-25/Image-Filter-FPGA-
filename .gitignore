@@ -49,3 +49,8 @@ ModulosProyectoArqui1/fuseRelaunch.cmd
 *.xbcd
 ModulosProyectoArqui1/isim/Banco_TB_isim_beh.exe.sim/tmp_save/_1
 ModulosProyectoArqui1/isim/pn_info
+*.cmd_log
+*.xst
+*.stx
+*.wcfg
+*.ngr

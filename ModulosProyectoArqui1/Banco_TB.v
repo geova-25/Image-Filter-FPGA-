@@ -68,16 +68,7 @@ module Banco_TB;
 		// Wait 100 ns for global reset to finish
 		#100;
         
-		// Add stimulus here
-		WE_C = 0;
-		WE_V = 0;
-		DirA = 0;
-		DirB = 0;
-		DirC = 0;
-		DirV = 0;
-		DinC = 0;
-		DinV = 0;
-		#100;
+
 		
 		//escribo un 54 en R3
 		//leo R3
@@ -87,20 +78,20 @@ module Banco_TB;
 		DirB = 0;
 		DirC = 4'd3;
 		DirV = 4'd15;
-		DinC = 4'd54;
-		DinV = 4'd19;
+		DinC = 32'd54;
+		DinV = 32'd19;
 		#100;
 		
-		//Escribo  un 19 en R15 
-		//leo R3 y R15
+		//Escribo  un 99 en R15 
+		//leo R3=54 y R15=99
 		WE_C = 1;
 		WE_V = 0;
 		DirA = 4'd3;
 		DirB = 4'd15;
 		DirC = 4'd3;
 		DirV = 4'd15;
-		DinC = 4'd54;
-		DinV = 4'd19;
+		DinC = 32'd54;
+		DinV = 32'd99;
 		#100;
 
 	end
