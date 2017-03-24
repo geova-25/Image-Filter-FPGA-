@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   02:55:51 03/24/2017
-// Design Name:   InstructionMemory
-// Module Name:   C:/Image-Filter/InstructionMemoryTest.v
+// Create Date:   05:12:44 03/24/2017
+// Design Name:   Mux
+// Module Name:   C:/Image-Filter/Mux_TB.v
 // Project Name:  Image-Filter
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: InstructionMemory
+// Verilog Test Fixture created by ISE for module: Mux
 //
 // Dependencies:
 // 
@@ -22,33 +22,32 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module InstructionMemory_TB;
+module Mux_TB;
 
 	// Inputs
-	reg [31:0] DIR;
+	reg [31:0] A;
+	reg [31:0] B;
+	reg S;
 
 	// Outputs
-	wire [31:0] DO;
+	wire [31:0] Y;
 
 	// Instantiate the Unit Under Test (UUT)
-	InstructionMemory uut (
-		.DIR(DIR), 
-		.DO(DO)
+	Mux uut (
+		.A(A), 
+		.B(B), 
+		.S(S), 
+		.Y(Y)
 	);
 
 	initial begin
 		// Initialize Inputs
-		DIR = 0;
+		A = 0;
+		B = 0;
+		S = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
-		DIR = 4;
-		#100;
-		DIR = 8;
-		#100;
-		DIR = 12;		
-		#100;
-		DIR = 16;		
         
 		// Add stimulus here
 

@@ -23,7 +23,8 @@ module InstructionMemory(
     output wire [31:0] DO
     );
 	
-	reg [7:0] InstMem[262143:0];	 
+	//reg [7:0] InstMem[262143:0];	 
+	reg [7:0] InstMem[63:0];	 
 	initial begin
 		InstMem[0] = 8'hFF;
 		InstMem[1] = 8'h00;

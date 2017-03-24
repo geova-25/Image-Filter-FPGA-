@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   02:55:51 03/24/2017
-// Design Name:   InstructionMemory
-// Module Name:   C:/Image-Filter/InstructionMemoryTest.v
+// Create Date:   05:26:18 03/24/2017
+// Design Name:   PC
+// Module Name:   C:/Image-Filter/PC_TB.v
 // Project Name:  Image-Filter
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: InstructionMemory
+// Verilog Test Fixture created by ISE for module: PC
 //
 // Dependencies:
 // 
@@ -22,33 +22,29 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module InstructionMemory_TB;
+module PC_TB;
 
 	// Inputs
-	reg [31:0] DIR;
+	reg [31:0] Di_pc;
+	reg clk;
 
 	// Outputs
-	wire [31:0] DO;
+	wire [31:0] Do_pc;
 
 	// Instantiate the Unit Under Test (UUT)
-	InstructionMemory uut (
-		.DIR(DIR), 
-		.DO(DO)
+	PC uut (
+		.Di_pc(Di_pc), 
+		.clk(clk), 
+		.Do_pc(Do_pc)
 	);
 
 	initial begin
 		// Initialize Inputs
-		DIR = 0;
+		Di_pc = 0;
+		clk = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
-		DIR = 4;
-		#100;
-		DIR = 8;
-		#100;
-		DIR = 12;		
-		#100;
-		DIR = 16;		
         
 		// Add stimulus here
 
