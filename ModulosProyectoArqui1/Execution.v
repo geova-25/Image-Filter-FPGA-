@@ -19,7 +19,84 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Execution(
+		input sel_res,
+		input [2:0]ALU_CTRL,
+		input [1:0]selOp_A,
+		input [1:0]selOp_B,
+		input [31:0]PCmas4,
+		input [31:0]DoA,
+		input [31:0]DoB,
+		input [31:0]immediato,
+		input [31:0]adelantado, //bus que tira la unidad de adelantamiento
+		input [39:0]cuarenta,
+		input [3:0]Rg_input,
+		//salidas
+		output wire[3:0]Rg_output,
+		output wire[7:0]DoB_byte,
+		output wire[31:0]result,
+		output wire N,
+		output wire Z
+		
     );
+	 
+	 wire [31:0]resultMuxA;
+	 wire [31:0]resultMuxB;
+	 wire [31:0]resultAlu;
+	 wire [7:0]pixelMayor;
+	 
+	 Mux32bit4Canales muxOpA(		
+		.S(selOp_A), //seleccion
+		.A(PCmas4),  //00
+		.B(adelantado),  //01
+		.C(DoA),  //10
+		.D(32'b0),	 //11
+		.Y(resultMuxA) //salida
+    );
+	 
+	 
+	 
+	  Mux32bit4Canales muxOpB(		
+		.S(selOp_B),  //seleccion
+		.A(DoB),
+		.B(immediato),
+		.C(32'b0),
+		.D(adelantado),
+		.Y(resultMuxB)  //salida
+    );
+	 
+	
 
+	 
+	ALU alu(
+		.A(resultMuxA),
+		.B(resultMuxB),
+		.Alu_CTRL(ALU_CTRL),
+		.C(),  //no se usa
+		.Z(Z), 
+		.N(N),
+		.out(resultAlu) 
+	);
+	
+	
+	
+	Comparador compara(
+		.A(cuarenta[39:32]),
+		.B(cuarenta[31:24]),
+		.C(cuarenta[23:16]),
+		.D(cuarenta[15:8]),
+		.E(cuarenta[7:0]),
+		.mayor(pixelMayor)
+    );
+	 
+	
+
+	Mux mux_res(
+		.A(resultAlu),		//Entrada 0 de 32 bits
+		.B({24'b0,pixelMayor}),		//Entrada 1 de 32 bits
+		.S(sel_res),				//Entrada de seleccion de 1 bit
+		.Y(result)	//Salida de data seleccionada de 32 bits
+    );
+	 
+	 
 
 endmodule
