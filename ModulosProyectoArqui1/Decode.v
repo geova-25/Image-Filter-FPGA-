@@ -56,6 +56,13 @@ module Decode(
 	 wire [3:0] salidaMuxB;
 	 wire [3:0] salidaMuxC;
 	 
+	 wire [23:0] imm24Corrido;
+	 
+	 corrimiento corr(
+		.in(imm24),
+		.out(imm24Corrido)
+    );
+	 
 	 Mux4bitDosCanales muxA(
     .A(Rp),		//Entrada 0 de 32 bits
     .B(4'b1110),		//Entrada 1 de 32 bits
@@ -97,7 +104,7 @@ module Decode(
 		//in
 		.selExt(sel_ext),
 		.imm16(imm16),
-		.imm24(imm24),
+		.imm24(imm24Corrido),
 		//out
 		.immediato(immediato)
     );
