@@ -37,8 +37,8 @@ module registro32bits(
 	reg [31:0]Do=0;
 	
 	
-	
-	always @(negedge clk)
+	//escritura 
+	always @(posedge clk)
 	begin
 		if(WEc & CSc)
 			Do=DinC;
@@ -50,8 +50,10 @@ module registro32bits(
 	end
 	
 
+	//lectura 
 	
-	assign DoA = (CSa)? Do: 32'bz;
-	assign DoB = (CSb)? Do: 32'bz;
+	
+	assign DoA = (CSa & ~clk)? Do: 32'bz;
+	assign DoB = (CSb & ~clk)? Do: 32'bz;
 			
 endmodule

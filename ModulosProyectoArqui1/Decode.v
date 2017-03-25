@@ -20,6 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Decode(
 		//control
+		input clk,
 		input sel_A,
 		input sel_C,
 		input sel_B,
@@ -31,7 +32,7 @@ module Decode(
 		input [3:0]Rp,
 		input [3:0]Rs,
 		input [23:0]imm24,
-		input [15:0]imm15,
+		input [15:0]imm16,
 		input [3:0]Rg_In,
 		input [3:0]Rg_WB,
 		input [31:0]DinC,
@@ -45,6 +46,60 @@ module Decode(
 		output wire [31:0]immediato
 
 
+    );
+	 
+	 assign Rg_Out = Rg_In;
+	 assign cuarenta = {DoA[31:0],DoB[31:24]};
+	 assign PCmas4_Out = PCmas4_In;
+	 
+	 wire [3:0] salidaMuxA;
+	 wire [3:0] salidaMuxB;
+	 wire [3:0] salidaMuxC;
+	 
+	 Mux4bitDosCanales muxA(
+    .A(Rp),		//Entrada 0 de 32 bits
+    .B(4'b1110),		//Entrada 1 de 32 bits
+    .S(sel_A),				//Entrada de seleccion de 1 bit
+    .Y(salidaMuxA)	//Salida de data seleccionada de 32 bits
+    );
+	 
+	 Mux4bitDosCanales muxB(
+    .A(Rs),		//Entrada 0 de 32 bits
+    .B(4'b1111),		//Entrada 1 de 32 bits
+    .S(sel_B),				//Entrada de seleccion de 1 bit
+    .Y(salidaMuxB)	//Salida de data seleccionada de 32 bits
+    );
+	 
+	 Mux4bitDosCanales muxC(
+    .A(Rg_WB),		//Entrada 0 de 32 bits
+    .B(4'b1110),		//Entrada 1 de 32 bits
+    .S(sel_C),				//Entrada de seleccion de 1 bit
+    .Y(salidaMuxC)	//Salida de data seleccionada de 32 bits
+    );
+	 
+	Banco banco(
+	//entradas
+		.clk(clk),
+		.WE_C(WE_C),
+		.WE_V(WE_V),
+		.DirA(salidaMuxA),
+		.DirB(salidaMuxB),
+		.DirC(salidaMuxC),
+		.DirV(4'b1111),
+		.DinC(DinC),
+		.DinV({DinV_8bit,24'b0}),
+	//salidas
+		.DoA(DoA),
+		.DoB(DoB)
+    );
+	 
+	 immExt extensor(
+		//in
+		.selExt(sel_ext),
+		.imm16(imm16),
+		.imm24(imm24),
+		//out
+		.immediato(immediato)
     );
 
 

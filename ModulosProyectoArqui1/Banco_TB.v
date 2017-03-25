@@ -71,7 +71,7 @@ module Banco_TB;
 
 		
 		//escribo un 54 en R3
-		//leo R3
+		//leo R3=54
 		WE_C = 0;
 		WE_V = 1;
 		DirA = 4'd3;
