@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    06:14:19 03/24/2017 
+// Create Date:    00:12:24 03/26/2017 
 // Design Name: 
-// Module Name:    corrimiento 
+// Module Name:    Concatenador40bit 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,11 +18,11 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module corrimiento(
-		input [23:0]in,
-		output wire [25:0]out
+module Concatenador40bit(
+		input [31:0]DoA,
+		input [7:0]DoB,
+		output wire [39:0]cuarenta
     );
-
-	assign out = in <<2;
+	assign cuarenta = {DoA,DoB};
 
 endmodule

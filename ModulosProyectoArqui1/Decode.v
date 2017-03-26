@@ -43,24 +43,27 @@ module Decode(
 		output wire [31:0]DoA,
 		output wire [31:0]DoB,
 		output wire [39:0]cuarenta,
-		output wire [31:0]immediato
+		output wire [31:0]immediato,
+		output wire [3:0]Rp_out,
+		output wire [3:0]Rs_out
 
 
     );
 	 
-	 assign Rg_Out = Rg_In;
-	 assign cuarenta = {DoA[31:0],DoB[31:24]};
-	 assign PCmas4_Out = PCmas4_In;
+	 assign Rg_Out = Rg_In ;
+	 assign PCmas4_Out = PCmas4_In ;
+	 assign Rp_out = Rp;
+	 assign Rs_out = Rs;
 	 
 	 wire [3:0] salidaMuxA;
 	 wire [3:0] salidaMuxB;
 	 wire [3:0] salidaMuxC;
 	 
-	 wire [23:0] imm24Corrido;
+	 wire [25:0] imm26Corrido;
 	 
 	 corrimiento corr(
 		.in(imm24),
-		.out(imm24Corrido)
+		.out(imm26Corrido)
     );
 	 
 	 Mux4bitDosCanales muxA(
@@ -100,14 +103,22 @@ module Decode(
 		.DoB(DoB)
     );
 	 
+	  
+	 
 	 immExt extensor(
 		//in
 		.selExt(sel_ext),
 		.imm16(imm16),
-		.imm24(imm24Corrido),
+		.imm26(imm26Corrido),
 		//out
 		.immediato(immediato)
     );
+	 
+	 Concatenador40bit concat (
+		.DoA(DoA),
+		.DoB({DoB[31],DoB[30],DoB[29],DoB[28],DoB[27],DoB[26],DoB[25],DoB[24]}),
+		.cuarenta(cuarenta)
+	 );
 
 
 endmodule

@@ -22,14 +22,14 @@ module immExt(
 
 		input selExt,
 		input [15:0]imm16,
-		input [23:0]imm24,
+		input [25:0]imm26,
 		
 		output reg [31:0]immediato
     );
 
 	always @*
 	if(selExt)
-		immediato = {8'b0,imm24};
+		immediato = {6'b0,imm26};
 	else
 		immediato = {16'b0,imm16};
 
