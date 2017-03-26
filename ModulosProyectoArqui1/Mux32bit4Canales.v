@@ -22,7 +22,7 @@ module Mux32bit4Canales(
 		input [1:0]S,
 		input [31:0]A,B,C,D,
 		output reg[31:0]Y
-    );
+    ); 
 	 
 	 always@*
 	 begin

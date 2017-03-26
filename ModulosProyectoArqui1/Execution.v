@@ -39,6 +39,9 @@ module Execution(
 		
     );
 	 
+	 assign Rg_output = Rg_input;
+	 assign DoB_byte = DoB[31:24];
+	 
 	 wire [31:0]resultMuxA;
 	 wire [31:0]resultMuxB;
 	 wire [31:0]resultAlu;
