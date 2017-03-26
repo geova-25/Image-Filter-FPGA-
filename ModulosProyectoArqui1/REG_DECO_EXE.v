@@ -10,6 +10,7 @@ module REG_DECO_EXE(
 	input we_v_aux_in,
 	input suma_resta_in,
 	input salto_in,
+	input PROHIB,
 	input sel_res_in,
 	input [2:0]ALU_CTRL_in,
 	input [1:0]selOp_A_in,
@@ -32,6 +33,7 @@ module REG_DECO_EXE(
 	output reg we_v_aux,
 	output reg suma_resta,
 	output reg salto,
+	output reg PROHIB_EXE,
 	output reg sel_res,
 	output reg [2:0]ALU_CTRL,
 	output reg [1:0]selOp_A,
@@ -61,6 +63,7 @@ module REG_DECO_EXE(
 		we_v_aux<=we_v_aux_in;
 		suma_resta<=suma_resta_in;
 		salto<=salto_in;
+		PROHIB_EXE <=  PROHIB;
 		sel_res<=sel_res_in;
 		ALU_CTRL<=ALU_CTRL_in;
 		selOp_A<=selOp_A_in;

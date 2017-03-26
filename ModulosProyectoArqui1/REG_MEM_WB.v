@@ -25,15 +25,18 @@ module REG_MEM_WB(
 		input SEL_C_In,
 		input WE_V_In,	
 		input WE_C_In,
+		input PROHIB_MEM,
 		input SEL_STO_In,	 
 		input [31:0] Do_In,
 		input [7:0] Dob_In,
 		input [31:0] ALU_Result_In,
-		input [3:0] Rg_In,		
+		input [3:0] Rg_In,	
+		
 		output  wire [31:0] Do ,
 		output  wire [7:0] Dob ,
 		output  wire [31:0] ALU_Result,
 		output  wire WE_C ,
+		output  wire PROHIB_WB,
 		output  wire WE_V ,
 		output  wire SEL_C ,
 		output  wire SEL_DAT,
@@ -45,6 +48,7 @@ module REG_MEM_WB(
 	reg [7:0] DobReg = 8'b0;
 	reg [31:0] ALU_ResultReg = 32'b0;
 	reg WE_CReg = 1'b0;
+	reg PROHIB_REG = 1'b0;
 	reg WE_VReg = 1'b0;
 	reg SEL_CReg = 1'b0;
 	reg SEL_DATReg = 1'b0;
@@ -59,7 +63,8 @@ module REG_MEM_WB(
 		WE_VReg = WE_V_In;
 		SEL_CReg = SEL_C_In;
 		SEL_DATReg = SEL_DAT_In;
-		SEL_STOReg = SEL_STO_In;		
+		SEL_STOReg = SEL_STO_In;	
+		PROHIB_REG= PROHIB_MEM;
 	end
 	
 	assign Do = DoReg;
@@ -71,5 +76,6 @@ module REG_MEM_WB(
 	assign SEL_DAT = SEL_DATReg;
 	assign SEL_STO = SEL_STOReg;
 	assign Rg = Rg_In;
+	assign PROHIB_WB = PROHIB_REG ;
 
 endmodule

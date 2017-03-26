@@ -1,14 +1,15 @@
 module REG_EXE_MEM(
 
-
+	input clk,
 	input we_mem_in,
 	input sel_dat_in,
 	input sel_c_in,
 	input sel_v_in,
 	input we_c_in,
+	input prohib_exe,
 	input [31:0]result_in,  //salida del mux
 	input [7:0]DoB_byte_in,
-	input [3:0]Rg_exe
+	input [3:0]Rg_exe,
 
 
 	output reg we_mem,
@@ -16,6 +17,7 @@ module REG_EXE_MEM(
 	output reg sel_c,
 	output reg sel_v,
 	output reg we_c,
+	output reg prohib_mem,
 	output reg [31:0]result,  //salida del mux
 	output reg [7:0]DoB_byte,
 	output reg [3:0]Rg_mem
@@ -31,6 +33,7 @@ module REG_EXE_MEM(
 		result <= result_in;
 		DoB_byte<= DoB_byte_in;
 		Rg_mem <=Rg_exe;	
+		prohib_mem <= prohib_exe;
 	end
 
 endmodule 
