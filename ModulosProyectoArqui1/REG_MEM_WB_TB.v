@@ -56,7 +56,6 @@ module REG_MEM_WB_TB;
 		.SEL_C_In(SEL_C_In), 
 		.WE_V_In(WE_V_In), 
 		.WE_C_In(WE_C_In), 
-		.SEL_STO_In(SEL_STO_In), 
 		.Do_In(Do_In), 
 		.Dob_In(Dob_In), 
 		.ALU_Result_In(ALU_Result_In), 
@@ -68,7 +67,6 @@ module REG_MEM_WB_TB;
 		.WE_V(WE_V), 
 		.SEL_C(SEL_C), 
 		.SEL_DAT(SEL_DAT), 
-		.SEL_STO(SEL_STO), 
 		.Rg(Rg)
 	);
 
@@ -80,7 +78,6 @@ module REG_MEM_WB_TB;
 		SEL_C_In = 0;
 		WE_V_In = 0;
 		WE_C_In = 0;
-		SEL_STO_In = 0;
 		Do_In = 0;
 		Dob_In = 0;
 		ALU_Result_In = 0;
@@ -95,7 +92,6 @@ module REG_MEM_WB_TB;
 		SEL_C_In = 0;
 		WE_V_In = 1;
 		WE_C_In = 0;
-		SEL_STO_In = 1;
 		Do_In = 32'hEAB3321;
 		Dob_In = 8'h12;
 		ALU_Result_In = 32'hEEEEEEEE;
@@ -108,7 +104,6 @@ module REG_MEM_WB_TB;
 		SEL_C_In = 0;
 		WE_V_In = 1;
 		WE_C_In = 0;
-		SEL_STO_In = 1;
 		Do_In = 32'hEAB3321;
 		Dob_In = 8'h12;
 		ALU_Result_In = 32'hEEEEEEEE;
@@ -123,7 +118,6 @@ module REG_MEM_WB_TB;
 		SEL_C_In = 1;
 		WE_V_In = 1;
 		WE_C_In = 1;
-		SEL_STO_In = 1;
 		Do_In = 32'h1111111;
 		Dob_In = 8'h11;
 		ALU_Result_In = 32'h22222222;
@@ -136,7 +130,6 @@ module REG_MEM_WB_TB;
 		SEL_C_In = 1;
 		WE_V_In = 1;
 		WE_C_In = 1;
-		SEL_STO_In = 1;
 		Do_In = 32'h1111111;
 		Dob_In = 8'h11;
 		ALU_Result_In = 32'h22222222;
