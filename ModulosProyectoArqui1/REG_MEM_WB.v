@@ -52,17 +52,14 @@ module REG_MEM_WB(
 	 
 	always @(posedge clk)
 	begin
-	 if(~WE)
-		 begin
-			DoReg = Do_In;
-			DobReg = Dob_In;
-			ALU_ResultReg = ALU_Result_In;
-			WE_CReg = WE_C_In;
-			WE_VReg = WE_V_In;
-			SEL_CReg = SEL_C_In;
-			SEL_DATReg = SEL_DAT_In;
-			SEL_STOReg = SEL_STO_In;		
-		 end
+		DoReg = Do_In;
+		DobReg = Dob_In;
+		ALU_ResultReg = ALU_Result_In;
+		WE_CReg = WE_C_In;
+		WE_VReg = WE_V_In;
+		SEL_CReg = SEL_C_In;
+		SEL_DATReg = SEL_DAT_In;
+		SEL_STOReg = SEL_STO_In;		
 	end
 	
 	assign Do = DoReg;
