@@ -89,6 +89,7 @@ module REG_MEM_WB_TB;
 		//----------------------------------- Prueba 1
 		#100;
 		clk = 1;
+		#10		
 		WE = 0;
 		SEL_DAT_In = 1;
 		SEL_C_In = 0;
@@ -101,7 +102,7 @@ module REG_MEM_WB_TB;
 		Rg_In = 4'h5;
 
 		#100;
-		clk = 0;
+		clk = 0;	
 		WE = 0;
 		SEL_DAT_In = 1;
 		SEL_C_In = 0;
@@ -116,6 +117,7 @@ module REG_MEM_WB_TB;
 		//----------------------------------- Prueba 2
 		#100;
 		clk = 1;
+		#10		
 		WE = 0;
 		SEL_DAT_In = 1;
 		SEL_C_In = 1;
