@@ -80,7 +80,8 @@ module Control_Unit(
 		assign WE_C_AUX =  ((OpCode == 4'b1000) | (OpCode == 4'b1001) | (OpCode == 4'b1111) | (F == 2'b11)) ? 1'b1:
 																																				1'b0;
 																																				
-		assign SUMA_RESTA = (((OpCode == 4'b0000) | (OpCode == 4'b0010)) & !(F == 2'b11)) ? 1'b1:
+		assign SUMA_RESTA = (((OpCode == 4'b0000) | (OpCode == 4'b0001) |
+									(OpCode == 4'b0010) | (OpCode == 4'b0011)) & !(F == 2'b11)) ? 1'b1:
 																														1'b0;	
 		assign SALTO = (OpCode == 4'b1001) ? 1'b1:
 													 1'b0;

@@ -24,27 +24,13 @@ module InstructionMemory(
     );
 	
 	//reg [7:0] InstMem[262143:0];	 
-	reg [7:0] InstMem[63:0];	 
+	reg [7:0] InstMem[127:0];	 
+	//integer i = 5'b0;	
 	initial begin
-		InstMem[0] = 8'hFF;
-		InstMem[1] = 8'h00;
-		InstMem[2] = 8'h00;
-		InstMem[3] = 8'h00;
-		
-		InstMem[4] = 8'h00;		
-		InstMem[5] = 8'hFF;
-		InstMem[6] = 8'h00;
-		InstMem[7] = 8'h00;		
+	$readmemh("InstructionsMemInit.txt",InstMem);
+			/**for (i=0; i < 32; i=i+1)
+        $display("%d:%h",i,InstMem[i]);		**/
 
-		InstMem[8] = 8'h00;		
-		InstMem[9] = 8'h00;
-		InstMem[10] = 8'hFF;
-		InstMem[11] = 8'h00;		
-		
-		InstMem[12] = 8'h00;		
-		InstMem[13] = 8'h00;
-		InstMem[14] = 8'h00;
-		InstMem[15] = 8'hFF;				
 	end	
 	
 	assign DO = {InstMem[DIR+3],InstMem[DIR+2],InstMem[DIR+1],InstMem[DIR]};

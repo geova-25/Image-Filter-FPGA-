@@ -29,39 +29,12 @@ module DataMemory(
     );
 	 
 	 //reg [7:0] DataMem[262143:0];
-	 reg [7:0] DataMem[63:0];	 
-
+	 reg [7:0] DataMem[127:0];	 
+	 integer i = 5'b0;
 	initial begin
-	//	Constante M
-		DataMem[0] = 8'h00;
-		DataMem[1] = 8'h0C;
-		DataMem[2] = 8'h11;
-		DataMem[3] = 8'h11;
-	//	Constante N		
-		DataMem[4] = 8'h33;
-		DataMem[5] = 8'h44;
-		DataMem[6] = 8'h55;
-		DataMem[7] = 8'h66;
-	//MASCARA1	
-		DataMem[8] = 8'hFF;
-		DataMem[9] = 8'h00;
-		DataMem[10] = 8'h00;
-		DataMem[11] = 8'h00;
-	//MASCARA2	
-		DataMem[12] = 8'h00;		
-		DataMem[13] = 8'hFF;
-		DataMem[14] = 8'h00;
-		DataMem[15] = 8'h00;		
-	//MASCARA3
-		DataMem[16] = 8'h00;		
-		DataMem[17] = 8'h00;
-		DataMem[18] = 8'hFF;
-		DataMem[19] = 8'h00;		
-	//MASCARA4
-		DataMem[20] = 8'h00;		
-		DataMem[21] = 8'h00;
-		DataMem[22] = 8'h00;
-		DataMem[23] = 8'hFF;				
+	$readmemh("DataMemInit.txt",DataMem);
+		/**	for (i=0; i < 32; i=i+1)
+        $display("%d:%h",i,DataMem[i]);	**/
 	end		 
 	 
 	 reg [31:0] DoReg;	 
