@@ -28,8 +28,8 @@ module DataMemory(
     output wire [7:0] Dob
     );
 	 
-	 //reg [7:0] DataMem[262143:0];
-	 reg [7:0] DataMem[127:0];	 
+	 reg [7:0] DataMem[131072:0];
+	 //reg [7:0] DataMem[127:0];	 
 	 integer i = 5'b0;
 	initial begin
 	$readmemh("DataMemInit.txt",DataMem);
