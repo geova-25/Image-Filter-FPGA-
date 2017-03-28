@@ -28,32 +28,24 @@ module Decode(
 		input WE_C,
 		input WE_V,
 		//datos
-		input [31:0]PCmas4_In,
 		input [3:0]Rp,
 		input [3:0]Rs,
 		input [23:0]imm24,
 		input [15:0]imm16,
-		input [3:0]Rg_In,
 		input [3:0]Rg_WB,
 		input [31:0]DinC,
 		input [7:0]DinV_8bit,
 		//salidas
-		output wire [31:0]PCmas4_Out,
-		output wire [3:0]Rg_Out,
 		output wire [31:0]DoA,
 		output wire [31:0]DoB,
 		output wire [39:0]cuarenta,
-		output wire [31:0]immediato,
-		output wire [3:0]Rp_out,
-		output wire [3:0]Rs_out
+		output wire [31:0]immediato
 
 
     );
 	 
-	 assign Rg_Out = Rg_In ;
-	 assign PCmas4_Out = PCmas4_In ;
-	 assign Rp_out = Rp;
-	 assign Rs_out = Rs;
+
+	
 	 
 	 wire [3:0] salidaMuxA;
 	 wire [3:0] salidaMuxB;

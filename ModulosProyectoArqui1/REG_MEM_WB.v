@@ -20,7 +20,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 module REG_MEM_WB(
 		input clk,
-		input WE,
 		input SEL_DAT_In,		
 		input SEL_C_In,
 		input WE_V_In,	

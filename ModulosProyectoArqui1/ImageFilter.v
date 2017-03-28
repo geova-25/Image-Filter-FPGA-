@@ -22,54 +22,93 @@ module ImageFilter(
     input wire clk,
     output [31:0] salida
     );
-	 
-	wire sel_A; //K
-	wire sel_B; //K
-	wire sel_ext; //k
-	wire WE_C_deco; //K
-	wire WE_V_deco; //k 
-	wire [1:0] SELOP_B_deco; //k
-	wire [1:0] SELOP_A_deco; //k
-	wire SEL_RES_deco; //k
-	wire [2:0] ALU_CTRL_deco; //k
-	wire WE_MEM_deco; //k
-	wire SEL_DAT_deco;//k	
-	wire SEL_C_deco;//k
-	wire COMPARA_deco;//K
-	wire SUMA_RESTA_deco;//k
-	wire SALTO_deco;//k
-	wire PROHIB_deco;//k
-	
-	wire [31:0] Instruccion;//k
-	wire [31:0] Pcmas4_Fetch;//k
-	
-	wire [3:0]  OpCode;//k
-	wire [1:0]  F;//k
-	wire [31:0] Pcmas4_Deco_In; //k
-	wire [3:0]  Rg_Fetch;//k
-	wire [3:0]  Rp_Fetch;//k
-	wire [3:0]  Rs_Fetch;//k
-	wire [15:0] Inm;//k
-	wire [23:0] Label;//k
-	
-	wire [1:0] cond_deco;//k
-	wire [31:0] Pcmas4_Deco_OUT;//k
-	wire [31:0] DoA_deco;//k
-	wire [31:0] DoB_deco;//k
-	wire [31:0] immediato_deco;//k
-	wire [39:0]cuarenta_deco;//k
-	wire [3:0] Rp_deco;//k
-	wire [3:0] Rs_deco;//k
-	wire [3:0] Rg_deco;//k
-
-	wire [1:0] cond_exe;	//k
-	
+	 	
+	wire [31:0] Instruccion;
+	wire [31:0] Pcmas4_Fetch;
+	wire [31:0] result_exe;
+	wire sel_pc;
+	wire [31:0] Pcmas4_deco;
+	wire [3:0]  OpCode;
+	wire [1:0] cond_deco;
+	wire [1:0]  F;
+	wire [3:0]  Rg_deco;
+	wire [3:0]  Rp_deco;
+	wire [3:0]  Rs_deco;
+	wire [15:0] Inm_deco;
+	wire [23:0] Label_deco;
+	wire [3:0]  Rg_wb;
+	wire sel_A; 
+	wire sel_B; 
+	wire sel_ext;
+	wire sel_c_wb;
+	wire WE_C_wb;
+	wire WE_V_wb; 
+	wire WE_C_aux_deco;
+	wire WE_V_deco; 
+	wire SEL_C_deco;
+	wire SEL_DAT_deco;
+	wire WE_MEM_deco;
+	wire PROHIB_deco;
+	wire COMPARA_deco;
+	wire SEL_RES_deco;
+	wire [2:0] ALU_CTRL_deco;
+	wire [1:0] SELOP_B_deco; 
+	wire [1:0] SELOP_A_deco;  
+	wire [1:0] cond_exe;	
+	wire SUMA_RESTA_deco;
+	wire SALTO_deco;
+	wire [31:0] DoA_deco;
+	wire [31:0] DoB_deco;
+	wire [31:0] immediato_deco;
+	wire [39:0]cuarenta_deco;
 	wire WE_MEM_exe;
 	wire sel_dat_exe;
 	wire sel_c_exe;
 	wire we_v_exe;
-	
-	
+	wire WE_flags;
+	wire WE_C_aux_exe;
+	wire suma_resta_exe;
+	wire salto_exe;
+	wire PROHIB_exe;
+	wire WE_C_exe;
+	wire sel_res_exe;
+	wire [2:0] ALU_CTRL_exe;
+	wire [1:0] SELOP_B_exe; 
+	wire [1:0] SELOP_A_exe; 
+	wire [1:0] SELOP_B; 
+	wire [1:0] SELOP_A; 
+	wire [3:0]  Rp_exe;
+	wire [3:0]  Rs_exe;
+	wire [31:0] Pcmas4_exe;
+	wire [31:0] DoA_exe;
+	wire [31:0] DoB_exe;
+	wire [39:0]cuarenta_exe;
+	wire [3:0]  Rg_exe;
+	wire N, Z;
+	wire [7:0]DoBbyte_exe;
+	wire [31:0] immediato_exe;
+	wire [31:0]adelantadoA;
+	wire [31:0]adelantadoB;
+	wire [31:0] DinC_wb;
+	wire [7:0] DoB8_wb;
+	wire WE_mem_mem;
+	wire sel_dat_mem;
+	wire sel_c_mem;
+	wire we_v_mem;
+	wire we_c_mem;
+	wire PROHIB_mem;
+	wire [31:0]ALU_result_mem;
+	wire [7:0]DinBbyte_mem; //byte de entrada
+	wire [7:0]Dob_mem; //byte de salida
+	wire [31:0]Do_mem; //palabra de salida
+	wire [3:0]  Rg_mem;
+	wire PROHIB_wb;
+	wire sel_adel_opA;
+	wire sel_adel_opB;
+	wire sel_dat_wb;
+	wire [7:0]Dob_wb; //byte de salida
+	wire [31:0]Do_wb; //palabra de salida
+	wire [31:0]ALU_result_wb;
 	
 	
 	 
@@ -78,9 +117,9 @@ module ImageFilter(
 	
 	Fetch fetch (
 		//Entradas
-		.sel_STO(), 	
+		.sel_STO(sel_pc), 	
 		.clk(clk), 				
-		.Direccion_de_Salto(), 
+		.Direccion_de_Salto(result_exe), 
 		//Salidas
 		.Instruccion(Instruccion), 	
 		.Pcmas4(Pcmas4_Fetch)			
@@ -94,49 +133,42 @@ module ImageFilter(
 		.Instruction(Instruccion), 
 		.Pcmas4_In(Pcmas4_Fetch), 	
 		//salidas
-		.Pcmas4(Pcmas4_Deco_In), 		
+		.Pcmas4(Pcmas4_deco), 		
 		.OpCode(OpCode), 	
 		.Cond(cond_deco), 		
 		.F(F), 				
-		.Rg(Rg_Fetch), 	
-		.Rp(Rp_Fetch), 	
-		.Rs(Rs_Fetch), 	
-		.Inm(Inm), 			
-		.Label(Label) 		
+		.Rg(Rg_deco), 	
+		.Rp(Rp_deco), 	
+		.Rs(Rs_deco), 	
+		.Inm(Inm_deco), 			
+		.Label(Label_deco) 		
 	);	
 	
 //---------------------------------Etapa Decode-------------------------------------
 		
-	Decode decode (
-	//Entradas
+	Decode decode(
 		//control
-		.clk(clk),  				
-		.sel_A(sel_A), 			
-		.sel_C(sel_C), 			
-		.sel_B(sel_B), 			
-		.sel_ext(sel_ext), 		
-		.WE_C(WE_C), 				
-		.WE_V(WE_V), 				
+		.clk(clk),
+		.sel_A(sel_A),
+		.sel_C(sel_c_wb),
+		.sel_B(sel_B),
+		.sel_ext(sel_ext),
+		.WE_C(WE_C_wb),
+		.WE_V(WE_V_wb),
 		//datos
-		.PCmas4_In(Pcmas4_Deco_In),
-		.Rp(Rp_Fetch), 			
-		.Rs(Rs_Fetch), 			
-		.imm24(Label), 			
-		.imm16(Inm), 				
-		.Rg_In(Rg_Fetch), 		
-		.Rg_WB(), 			
-		.DinC(), 				
-		.DinV_8bit(), 
-	//Salidas
-		.PCmas4_Out(Pcmas4_Deco_OUT),  
-		.Rg_Out(Rg_deco), 
-		.DoA(DoA_deco), 
-		.DoB(DoB_deco), 
-		.cuarenta(cuarenta_deco),  
-		.immediato(immediato_deco),
-		.Rp_out(Rp_deco),  
-		.Rs_out(Rs_deco)   
-	);	
+		.Rp(Rp_deco),
+		.Rs(Rs_deco),
+		.imm24(Label_deco),
+		.imm16(Inm_deco),
+		.Rg_WB(Rg_wb),
+		.DinC(DinC_wb),
+		.DinV_8bit(DoB8_wb),
+		//salidas
+		.DoA(DoA_deco),
+		.DoB(DoB_deco),
+		.cuarenta(cuarenta_deco),
+		.immediato(immediato_deco)
+    );
 	
 	Control_Unit control_Unit (
 		//Entradas
@@ -146,19 +178,19 @@ module ImageFilter(
 		.SEL_A(sel_A), 		
 		.SEL_B(sel_B), 		
 		.SEL_EXT(sel_ext), 	
-		.SELOP_B(), 
-		.SELOP_A(), 
-		.SEL_RES(), 
-		.ALU_CTRL(), 
-		.WE_MEM(), 
-		.SEL_DAT(), 
+		.SELOP_B(SELOP_B_deco), 
+		.SELOP_A(SELOP_A_deco), 
+		.SEL_RES(SEL_RES_deco), 
+		.ALU_CTRL(ALU_CTRL_deco), 
+		.WE_MEM(WE_MEM_deco), 
+		.SEL_DAT(SEL_DAT_deco), 
 		.SEL_C(SEL_C_deco), 
-		.WE_C_AUX(WE_C_deco), 		
+		.WE_C_AUX(WE_C_aux_deco), 		
 		.WE_V(WE_V_deco), 			
-		.COMPARA(), 
-		.SUMA_RESTA(), 
-		.SALTO(), 
-		.PROHIB()
+		.COMPARA(COMPARA_deco), 
+		.SUMA_RESTA(SUMA_RESTA_deco), 
+		.SALTO(SALTO_deco), 
+		.PROHIB(PROHIB_deco)
 	);	
 //---------------------------------------------------------------------------------
 
@@ -172,7 +204,7 @@ module ImageFilter(
 		.sel_c_in(SEL_C_deco),  
 		.we_v_in(WE_V_deco), 
 		.compara_in(COMPARA_deco), 
-		.we_c_aux_in(WE_C_deco), 
+		.we_c_aux_in(WE_C_aux_deco), 
 		.suma_resta_in(SUMA_RESTA_deco), 
 		.salto_in(SALTO_deco), 
 		.PROHIB(PROHIB_deco), 
@@ -183,7 +215,7 @@ module ImageFilter(
 		//datos
 		.RP_exe_in(Rp_deco), 
 		.RS_exe_in(Rs_deco), 
-		.PCmas4_in(Pcmas4_Deco_OUT),
+		.PCmas4_in(Pcmas4_deco),
 		.DoA_in(DoA_deco), 
 		.DoB_in(DoB_deco), 
 		.inmediato_in(immediato_deco), 
@@ -195,23 +227,23 @@ module ImageFilter(
 		.sel_dat(sel_dat_exe), 
 		.sel_c(sel_c_exe), 
 		.we_v(we_v_exe), 
-		.compara(), 
-		.we_c_aux(), 
-		.suma_resta(), 
-		.salto(), 
-		.PROHIB_EXE(), 
-		.sel_res(), 
-		.ALU_CTRL(), 
-		.selOp_A(), 
-		.selOp_B(), 
-		.RP_exe(), 
-		.RS_exe(), 
-		.PCmas4(), 
-		.DoA(), 
-		.DoB(), 
-		.inmediato(), 
-		.cuarenta(), 
-		.Rg_exe()
+		.compara(WE_flags), 
+		.we_c_aux(WE_C_aux_exe), 
+		.suma_resta(suma_resta_exe), 
+		.salto(salto_exe), 
+		.PROHIB_EXE(PROHIB_exe), 
+		.sel_res(sel_res_exe), 
+		.ALU_CTRL(ALU_CTRL_exe), 
+		.selOp_A(SELOP_A_exe), 
+		.selOp_B(SELOP_B_exe), 
+		.RP_exe(Rp_exe), 
+		.RS_exe(Rs_exe), 
+		.PCmas4(Pcmas4_exe), 
+		.DoA(DoA_exe), 
+		.DoB(DoB_exe), 
+		.inmediato(immediato_exe), 
+		.cuarenta(cuarenta_exe), 
+		.Rg_exe(Rg_exe)
 	);	
 //-------------------------------------Etapa EXE--------------------------------------------
  
@@ -219,39 +251,36 @@ module ImageFilter(
 	//salidas
 		.clk(clk),
 		.Cond(cond_exe),
-		.N_in(),
-		.Z_in(),
-		.WE_C_aux(),
-		.suma_resta(),
-		.salto(),
-		.WE_flags(),
+		.N_in(N),
+		.Z_in(Z),
+		.WE_C_aux(WE_C_aux_exe),
+		.suma_resta(suma_resta_exe),
+		.salto(salto_exe),
+		.WE_flags(WE_flags),
 		//salidas
-		.sel_pc(),
-		.WE_C()
+		.sel_pc(sel_pc),
+		.WE_C(WE_C_exe)
 	
 );
 	
 	Execution ejecucion(
 		//entradas
-		
-		.sel_res(),
-		.ALU_CTRL(),
-		.selOp_A(),
-		.selOp_B(),
-		.PCmas4(),
-		.DoA(),
-		.DoB(),
-		.immediato(),
-		.adelantado(), //bus que tira la unidad de adelantamiento
-		.cuarenta(),
-		.Rg_input(),
-		
+		.sel_res(sel_res_exe),
+		.ALU_CTRL(ALU_CTRL_exe),
+		.selOp_A(SELOP_A),
+		.selOp_B(SELOP_B),
+		.PCmas4(Pcmas4_exe),
+		.DoA(DoA_exe),
+		.DoB(DoB_exe),
+		.immediato(immediato_exe),
+		.adelantadoA(adelantadoA), //bus que tira la unidad de adelantamiento
+		.adelantadoB(adelantadoB), //bus que tira la unidad de adelantamiento
+		.cuarenta(cuarenta_exe),
 		//salidas
-		.Rg_output(),
-		.DoB_byte(),
-		.result(),
-		.N(),
-		.Z()
+		.DoB_byte(DoBbyte_exe),
+		.result(result_exe),
+		.N(N),
+		.Z(Z)
 		
     );
 	
@@ -263,39 +292,35 @@ module ImageFilter(
 	.we_mem_in(WE_MEM_exe),
 	.sel_dat_in(sel_dat_exe),
 	.sel_c_in(sel_c_exe),
-	.sel_v_in(),
-	.we_c_in(we_v_exe),
-	.prohib_exe(),
-	.result_in(),  //salida del mux
-	.DoB_byte_in(),
-	.Rg_exe(),
+	.we_v_in(we_v_exe),
+	.we_c_in(WE_C_exe),
+	.prohib_exe(PROHIB_exe),
+	.result_in(result_exe),  //salida del mux
+	.DoB_byte_in(DoBbyte_exe),
+	.Rg_exe(Rg_exe),
 
 	//salidas
-	.we_mem(),
-	.sel_dat(),
-	.sel_c(),
-	.sel_v(),
-	.we_c(),
-	.prohib_mem(),
-	.result(),  //salida del mux
-	.DoB_byte(),
-	.Rg_mem()
+	.we_mem(WE_mem_mem),
+	.sel_dat(sel_dat_mem),
+	.sel_c(sel_c_mem),
+	.we_v(we_v_mem),
+	.we_c(we_c_mem),
+	.prohib_mem(PROHIB_mem),
+	.result(ALU_result_mem),  //salida del mux
+	.DoB_byte(DinBbyte_mem),
+	.Rg_mem(Rg_mem)
 );
 
 //------------------------------Etapa de memoria-----------------------------------------	
 	Mem etapa_memoria(
 		//entradas
 		.clk(clk),
-		.ALU_Result_In(),
-		.Rs(),
-		.WE_mem(),
-		
+		.ALU_Result_In(ALU_result_mem),
+		.Rs(DinBbyte_mem),
+		.WE_mem(WE_mem_mem),
 		//salidas
-		.Rg_In(),
-		.Do(),
-		.Dob(),
-		.ALU_Result_Out,
-		.Rg()
+		.Do(Do_mem),
+		.Dob(Dob_mem)
     );
 
 //---------------------------------------------------------------------------------------	
@@ -303,64 +328,74 @@ module ImageFilter(
 	REG_MEM_WB   pipe_mem_wback(
 	//entradas
 		.clk(clk),
-		.WE(),
-		.SEL_DAT_In(),		
-		.SEL_C_In(),
-		.WE_V_In(),	
-		.WE_C_In(),
-		.PROHIB_MEM(),
-		.Do_In(),
-		.Dob_In(),
-		.ALU_Result_In(),
-		.Rg_In(),	
+		.SEL_DAT_In(sel_dat_mem),		
+		.SEL_C_In(sel_c_mem),
+		.WE_V_In(we_v_mem),	
+		.WE_C_In(we_c_mem),
+		.PROHIB_MEM(PROHIB_mem),
+		.Do_In(Do_mem),
+		.Dob_In(Dob_mem),
+		.ALU_Result_In(ALU_result_mem),
+		.Rg_In(Rg_mem),	
 	//salidas
-		.Do() ,
-		.Dob() ,
-		.ALU_Result(),
-		.WE_C() ,
-		.PROHIB_WB(),
-		.WE_V() ,
-		.SEL_C() ,
-		.SEL_DAT(),
-		.Rg() 
+		.Do(Do_wb) ,
+		.Dob(Dob_wb) ,
+		.ALU_Result(ALU_result_wb),
+		.WE_C(WE_C_wb) ,
+		.PROHIB_WB(PROHIB_wb),
+		.WE_V(WE_V_wb) ,
+		.SEL_C(sel_c_wb) ,
+		.SEL_DAT(sel_dat_wb),
+		.Rg(Rg_wb) 
     );
 	 
 	 
 //--------------------------------Etapa writeback---------------------------------------
 
 	WriteBack etapa_wb(
-    .Do(),
-    .ALU_Result(),
-    .Dob_In(),
-    .Rg_In(),
-    .sel_dat(),
-	 .Rg(),
-    .WriteBack_output(),
-    .Dob()
+    .Do(Do_wb),
+    .ALU_Result(ALU_result_wb),
+    .Dob_In(Dob_wb),
+    .sel_dat(sel_dat_wb),
+	 //salidas
+    .WriteBack_output(DinC_wb),
+    .Dob(DoB8_wb)
     );	
 	 
 //----------------------------------------------------------------------------------------
 
 	Unidad_de_Adelantamiento adelantamiento(
 	//entradas
-	.SelOp_A_exe(),
-	.SelOp_B_exe(),
-	.RG_mem(),
-	.RG_wb(),
-	.prohib_exe(),
-	.prohib_wb(),
-	.prohib_mem(),
-	.RS_exe(),
-	.RP_exe(),
+	.SelOp_A_exe(SELOP_A_exe),
+	.SelOp_B_exe(SELOP_B_exe),
+	.RG_mem(Rg_mem),
+	.RG_wb(Rg_wb),
+	.prohib_exe(PROHIB_exe),
+	.prohib_wb(PROHIB_wb),
+	.prohib_mem(PROHIB_mem),
+	.RS_exe(Rs_exe),
+	.RP_exe(Rp_exe),
 	//salidas
-	.sel_adel_opA(),
-	.sel_adel_opB(),
-	.SelOp_A(),
-	.SelOp_B()
+	.sel_adel_opA(sel_adel_opA),
+	.sel_adel_opB(sel_adel_opB),
+	.SelOp_A(SELOP_A),
+	.SelOp_B(SELOP_B)
 	
 );
 
+	Mux mux_adelantaA(
+    .A(ALU_result_mem),		//Entrada 0 de 32 bits
+    .B(ALU_result_wb),		//Entrada 1 de 32 bits
+    .S(sel_adel_opA),				//Entrada de seleccion de 1 bit
+    .Y(AdelantadoA)	//Salida de data seleccionada de 32 bits
+    );
 
+	Mux mux_adelantaB(
+    .A(ALU_result_mem),		//Entrada 0 de 32 bits
+    .B(ALU_result_wb),		//Entrada 1 de 32 bits
+    .S(sel_adel_opB),				//Entrada de seleccion de 1 bit
+    .Y(adelantadoB)	//Salida de data seleccionada de 32 bits
+    );
 
 
 endmodule

@@ -22,9 +22,7 @@ module WriteBack(
     input [31:0] Do,
     input [31:0] ALU_Result,
     input [7:0] Dob_In,
-    input [3:0] Rg_In,
     input sel_dat,
-	 output wire [3:0] Rg,
     output wire [31:0] WriteBack_output,
     output wire [7:0] Dob
     );
@@ -37,6 +35,5 @@ module WriteBack(
 	);
 	
 	assign Dob = Dob_In;
-	assign Rg = Rg_In;
 
 endmodule

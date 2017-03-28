@@ -27,11 +27,12 @@ module Execution(
 		input [31:0]DoA,
 		input [31:0]DoB,
 		input [31:0]immediato,
-		input [31:0]adelantado, //bus que tira la unidad de adelantamiento
+		input [31:0]adelantadoA, //bus que tira la unidad de adelantamiento
+		input [31:0]adelantadoB, //bus que tira la unidad de adelantamiento
 		input [39:0]cuarenta,
-		input [3:0]Rg_input,
+	
 		//salidas
-		output wire[3:0]Rg_output,
+		
 		output wire[7:0]DoB_byte,
 		output wire[31:0]result,
 		output wire N,
@@ -39,8 +40,8 @@ module Execution(
 		
     );
 	 
-	 assign Rg_output = Rg_input;
-	 assign DoB_byte = DoB[31:24];
+
+	 assign DoB_byte = DoB[7:0];
 	 
 	 wire [31:0]resultMuxA;
 	 wire [31:0]resultMuxB;
@@ -50,7 +51,7 @@ module Execution(
 	 Mux32bit4Canales muxOpA(		
 		.S(selOp_A), //seleccion
 		.A(PCmas4),  //00
-		.B(adelantado),  //01
+		.B(adelantadoA),  //01
 		.C(DoA),  //10
 		.D(32'b0),	 //11
 		.Y(resultMuxA) //salida
@@ -63,7 +64,7 @@ module Execution(
 		.A(DoB),
 		.B(immediato),
 		.C(32'b0),
-		.D(adelantado),
+		.D(adelantadoB),
 		.Y(resultMuxB)  //salida
     );
 	 

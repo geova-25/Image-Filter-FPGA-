@@ -23,11 +23,9 @@ module Mem(
 		input [31:0] ALU_Result_In,
 		input [7:0] Rs,
 		input WE_mem,
-		input [3:0] Rg_In,
 		output wire [31:0] Do,
-		output wire [7:0] Dob,
-		output wire [31:0] ALU_Result_Out,
-		output wire [3:0] Rg
+		output wire [7:0] Dob
+		
     );
 	 
 	 parameter CUATRO = 32'd4;
@@ -51,7 +49,5 @@ module Mem(
 		.cout() 						//Carry salida
 	);*/		
 	
-	assign ALU_Result_Out = ALU_Result_In;
-	assign Rg = Rg_In;
 
 endmodule
