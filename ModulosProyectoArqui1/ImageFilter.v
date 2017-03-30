@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ImageFilter(
     input wire clk,
-    output [31:0] salida
+    output wire [31:0] salida
     );
 	 	
 	wire [31:0] Instruccion;
@@ -109,7 +109,7 @@ module ImageFilter(
 	wire [7:0]Dob_wb; //byte de salida
 	wire [31:0]Do_wb; //palabra de salida
 	wire [31:0]ALU_result_wb;
-	
+	assign salida = ALU_result_wb;
 	
 	 
 	 
