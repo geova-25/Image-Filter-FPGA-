@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Control_Unit(
 		input [3:0] OpCode,
-		input [3:0] F,
+		input [1:0] F,
 		output wire SEL_A,	 
 		output wire SEL_B,
 		output wire SEL_EXT,
