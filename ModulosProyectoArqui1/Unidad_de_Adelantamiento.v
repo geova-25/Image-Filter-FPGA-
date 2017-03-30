@@ -1,14 +1,14 @@
 module Unidad_de_Adelantamiento(
 
-	input SelOp_A_exe,
-	input SelOp_B_exe,
-	input RG_mem,
-	input RG_wb,
+	input [1:0]SelOp_A_exe,
+	input [1:0]SelOp_B_exe,
+	input [3:0]RG_mem,
+	input [3:0]RG_wb,
 	input prohib_exe,
 	input prohib_wb,
 	input prohib_mem,
-	input RS_exe,
-	input RP_exe,
+	input [3:0]RS_exe,
+	input [3:0]RP_exe,
 	
 	output wire sel_adel_opA,
 	output wire sel_adel_opB,

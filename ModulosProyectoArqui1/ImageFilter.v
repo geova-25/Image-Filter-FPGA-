@@ -387,7 +387,7 @@ module ImageFilter(
     .A(ALU_result_mem),		//Entrada 0 de 32 bits
     .B(ALU_result_wb),		//Entrada 1 de 32 bits
     .S(sel_adel_opA),				//Entrada de seleccion de 1 bit
-    .Y(AdelantadoA)	//Salida de data seleccionada de 32 bits
+    .Y(adelantadoA)	//Salida de data seleccionada de 32 bits
     );
 
 	Mux mux_adelantaB(
