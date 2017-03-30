@@ -49,6 +49,7 @@ module REG_MEM_WB(
 	reg WE_VReg = 1'b0;
 	reg SEL_CReg = 1'b0;
 	reg SEL_DATReg = 1'b0;
+	reg Rg_inReg = 4'b0;
 	 
 	always @(posedge clk)
 	begin
@@ -60,6 +61,7 @@ module REG_MEM_WB(
 		SEL_CReg = SEL_C_In;
 		SEL_DATReg = SEL_DAT_In;	
 		PROHIB_REG= PROHIB_MEM;
+		Rg_inReg = Rg_In;
 	end
 	
 	assign Do = DoReg;
@@ -69,7 +71,7 @@ module REG_MEM_WB(
 	assign WE_V = WE_VReg;
 	assign SEL_C = SEL_CReg;
 	assign SEL_DAT = SEL_DATReg;
-	assign Rg = Rg_In;
+	assign Rg = Rg_inReg;
 	assign PROHIB_WB = PROHIB_REG ;
 
 endmodule

@@ -20,7 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ImageFilter(
     input wire clk,
-    output wire [31:0] salida
+    output wire [31:0] salidaDoa,
+    output wire [31:0] salidaDob,
+	 output wire [31:0] salida_OP,
+	 output wire [31:0] salida_sel_ext,
+	 output wire [31:0] salida_OP_sel_a,
+	 output wire [31:0] salida_OP_sel_b,
+	 output wire [31:0] salida_Rp,
+	 output wire [31:0] salida_Rs,
+	 output wire [31:0] salida_WE_C_wb,
+	 output wire [31:0] salida_Rg_wb,
+	 output wire [31:0] salida_Rg_deco,
+	 output wire [31:0] salida_Rg_exe,
+	 output wire [31:0] salida_Rg_mem,
+	 output wire [31:0] salida_DinC_wb,
+	 output wire [31:0] salida_result_exe
     );
 	 	
 	wire [31:0] Instruccion;
@@ -109,7 +123,7 @@ module ImageFilter(
 	wire [7:0]Dob_wb; //byte de salida
 	wire [31:0]Do_wb; //palabra de salida
 	wire [31:0]ALU_result_wb;
-	assign salida = ALU_result_wb;
+
 	
 	 
 	 
@@ -192,6 +206,9 @@ module ImageFilter(
 		.SALTO(SALTO_deco), 
 		.PROHIB(PROHIB_deco)
 	);	
+	
+
+		
 //---------------------------------------------------------------------------------
 
 	REG_DECO_EXE pipe_deco_exe (
@@ -396,6 +413,22 @@ module ImageFilter(
     .S(sel_adel_opB),				//Entrada de seleccion de 1 bit
     .Y(adelantadoB)	//Salida de data seleccionada de 32 bits
     );
-
-
+	 
+	 
+	assign salidaDoa = DoA_deco;
+	assign salidaDob = DoB_deco;
+	assign salida_OP = OpCode;
+	assign salida_sel_ext  = sel_ext;
+	assign salida_OP_sel_a = sel_A;
+	assign salida_OP_sel_b = sel_B;	
+	assign salida_Rp = Rp_deco;	
+	assign salida_Rs = Rs_deco;	
+	assign salida_WE_C_wb = WE_C_wb;	
+	assign salida_Rg_wb = Rg_wb;	
+	assign salida_Rg_deco = Rg_deco;	
+	assign salida_Rg_exe = Rg_exe;	
+	assign salida_Rg_mem = Rg_mem;	
+	assign salida_DinC_wb = DinC_wb;	
+	assign salida_result_exe = result_exe;	
+	
 endmodule

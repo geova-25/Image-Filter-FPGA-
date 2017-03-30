@@ -24,7 +24,7 @@ module InstructionMemory(
     );
 	
 	//reg [7:0] InstMem[262143:0];	 
-	reg [7:0] InstMem[127:0];	 
+	reg [7:0] InstMem[511:0];	 
 	//integer i = 5'b0;	
 	initial begin
 	$readmemh("InstructionsMemInit.txt",InstMem);
@@ -33,6 +33,6 @@ module InstructionMemory(
 
 	end	
 	
-	assign DO = {InstMem[DIR+3],InstMem[DIR+2],InstMem[DIR+1],InstMem[DIR]};
+	assign DO = {InstMem[DIR],InstMem[DIR+1],InstMem[DIR+2],InstMem[DIR+3]};
 
 endmodule

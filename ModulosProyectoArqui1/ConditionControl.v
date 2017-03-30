@@ -39,7 +39,7 @@ module ConditionControl (
 		.cumple(cumple)
 	);
 	
-	assign WE_C = ~(  suma_resta &  ~WE_C_aux  & cumple);
+	assign WE_C = ~( ~WE_C_aux  & cumple);
 	assign sel_pc = cumple & salto ; 
 	
 
