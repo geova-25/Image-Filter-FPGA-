@@ -49,7 +49,7 @@ module REG_MEM_WB(
 	reg WE_VReg = 1'b0;
 	reg SEL_CReg = 1'b0;
 	reg SEL_DATReg = 1'b0;
-	reg Rg_inReg = 4'b0;
+	reg [3:0] Rg_inReg = 4'b0;
 	 
 	always @(posedge clk)
 	begin

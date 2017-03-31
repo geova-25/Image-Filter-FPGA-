@@ -24,8 +24,8 @@ module ImageFilter(
     output wire [31:0] salidaDob,
 	 output wire [31:0] salida_OP,
 	 output wire [31:0] salida_sel_ext,
-	 output wire [31:0] salida_OP_sel_a,
-	 output wire [31:0] salida_OP_sel_b,
+	 output wire [31:0] salida_sel_a,
+	 output wire [31:0] salida_sel_b,
 	 output wire [31:0] salida_Rp,
 	 output wire [31:0] salida_Rs,
 	 output wire [31:0] salida_WE_C_wb,
@@ -34,7 +34,20 @@ module ImageFilter(
 	 output wire [31:0] salida_Rg_exe,
 	 output wire [31:0] salida_Rg_mem,
 	 output wire [31:0] salida_DinC_wb,
-	 output wire [31:0] salida_result_exe
+	 output wire [31:0] salida_result_exe,
+	 output wire [31:0] salida_Instruccion,
+	 output wire [31:0] salida_SELOP_A,
+	 output wire [31:0] salida_SELOP_B,
+	 output wire [31:0] salida_SELOP_A_deco,
+	 output wire [31:0] salida_SELOP_B_deco,
+	 output wire [31:0] salida_DoA_exe,
+	 output wire [31:0] salida_DoB_exe,
+	 output wire [31:0] salida_PROHIB_mem,
+	 output wire [31:0] salida_PROHIB_wb,
+	 output wire [31:0] salida_immediato_deco,
+	 output wire [31:0] salida_ALU_result_wb,
+	 output wire [31:0] salida_SEL_DAT_deco,
+	 output wire [31:0] salida_sel_c_wb
     );
 	 	
 	wire [31:0] Instruccion;
@@ -419,8 +432,8 @@ module ImageFilter(
 	assign salidaDob = DoB_deco;
 	assign salida_OP = OpCode;
 	assign salida_sel_ext  = sel_ext;
-	assign salida_OP_sel_a = sel_A;
-	assign salida_OP_sel_b = sel_B;	
+	assign salida_sel_a = sel_A;
+	assign salida_sel_b = sel_B;	
 	assign salida_Rp = Rp_deco;	
 	assign salida_Rs = Rs_deco;	
 	assign salida_WE_C_wb = WE_C_wb;	
@@ -430,5 +443,18 @@ module ImageFilter(
 	assign salida_Rg_mem = Rg_mem;	
 	assign salida_DinC_wb = DinC_wb;	
 	assign salida_result_exe = result_exe;	
+	assign salida_Instruccion = Instruccion;	
+	assign salida_SELOP_A = SELOP_A;	
+	assign salida_SELOP_B = SELOP_B;	
+	assign salida_SELOP_A_deco = SELOP_A_deco;	
+	assign salida_SELOP_B_deco = SELOP_B_deco;	
+	assign salida_DoA_exe = DoA_exe;	
+	assign salida_DoB_exe = DoB_exe;	
+	assign salida_PROHIB_mem = PROHIB_mem;	
+	assign salida_PROHIB_wb = PROHIB_wb;	
+	assign salida_immediato_deco = immediato_deco;	
+	assign salida_ALU_result_wb = ALU_result_wb;	
+	assign salida_SEL_DAT_deco = SEL_DAT_deco;	
+	assign salida_sel_c_wb = sel_c_wb;	
 	
 endmodule

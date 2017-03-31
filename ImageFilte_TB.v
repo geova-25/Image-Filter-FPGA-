@@ -32,8 +32,6 @@ module ImageFilte_TB;
 	wire [31:0] salidaDob;
 	wire [31:0] salida_OP;
 	wire [31:0] salida_sel_ext;
-	wire [31:0] salida_OP_sel_a;
-	wire [31:0] salida_OP_sel_b;
 	wire [31:0] salida_Rp;
 	wire [31:0] salida_Rs;
 	wire [31:0] salida_WE_C_wb;
@@ -43,6 +41,19 @@ module ImageFilte_TB;
 	wire [31:0] salida_Rg_mem;
 	wire [31:0] salida_DinC_wb;
 	wire [31:0] salida_result_exe;
+	wire [31:0] salida_Instruccion;
+	wire [31:0] salida_SELOP_A;
+	wire [31:0] salida_SELOP_B;
+	wire [31:0] salida_SELOP_A_deco;
+	wire [31:0] salida_SELOP_B_deco;
+	wire [31:0] salida_DoA_exe;
+	wire [31:0] salida_DoB_exe;
+	wire [31:0] salida_PROHIB_mem;
+	wire [31:0] salida_PROHIB_wb;
+	wire [31:0] salida_immediato_deco;
+	wire [31:0] salida_ALU_result_wb;
+	wire [31:0] salida_SEL_DAT_deco;
+	wire [31:0] salida_sel_c_wb;
 
 	// Instantiate the Unit Under Test (UUT)
 	ImageFilter uut (
@@ -51,8 +62,8 @@ module ImageFilte_TB;
 		.salidaDob(salidaDob),
 		.salida_OP(salida_OP),
 		.salida_sel_ext(salida_sel_ext),
-		.salida_OP_sel_a(salida_OP_sel_a),
-		.salida_OP_sel_b(salida_OP_sel_b),			
+		.salida_sel_a(salida_sel_a),
+		.salida_sel_b(salida_sel_b),			
 		.salida_Rp(salida_Rp),			
 		.salida_Rs(salida_Rs),
 		.salida_Rg_wb(salida_Rg_wb),
@@ -61,7 +72,20 @@ module ImageFilte_TB;
 		.salida_Rg_exe(salida_Rg_exe),
 		.salida_Rg_mem(salida_Rg_mem),
 		.salida_DinC_wb(salida_DinC_wb),
-		.salida_result_exe(salida_result_exe)
+		.salida_result_exe(salida_result_exe),
+		.salida_Instruccion(salida_Instruccion),
+		.salida_SELOP_A(salida_SELOP_A),
+		.salida_SELOP_B(salida_SELOP_B),
+		.salida_SELOP_A_deco(salida_SELOP_A_deco),
+		.salida_SELOP_B_deco(salida_SELOP_B_deco),
+		.salida_DoA_exe(salida_DoA_exe),
+		.salida_DoB_exe(salida_DoB_exe),
+		.salida_PROHIB_mem(salida_PROHIB_mem),
+		.salida_PROHIB_wb(salida_PROHIB_wb),
+		.salida_immediato_deco(salida_immediato_deco),
+		.salida_ALU_result_wb(salida_ALU_result_wb),
+		.salida_SEL_DAT_deco(salida_SEL_DAT_deco),
+		.salida_sel_c_wb(salida_sel_c_wb)
 		
 	);
 
@@ -110,6 +134,21 @@ module ImageFilte_TB;
 		clk = 1;
 		#200;		
 		clk = 0;			
+		clk = 1;
+		#200;		
+		clk = 0;
+		#200;		
+		clk = 1;
+		#200;		
+		clk = 0;	
+		#200;
+		clk = 1;
+		#200;		
+		clk = 0;
+		#200;		
+		clk = 1;
+		#200;		
+		clk = 0;				
         
 		// Add stimulus here
 
