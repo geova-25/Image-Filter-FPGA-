@@ -54,7 +54,7 @@ module DataMemory(
 
 	always @(negedge clk)		
 			begin
-				DoReg = {DataMem[A+3],DataMem[A+2],DataMem[A+1],DataMem[A]};
+				DoReg = {DataMem[A],DataMem[A+1],DataMem[A+2],DataMem[A+3]};
 				DobReg =  DataMem[B];
 			end		
 			
