@@ -27,15 +27,23 @@ module Comparador(
 	 output reg [7:0] mayor
     );
 
+/*
+
+		A = 8'h87;
+		B = 8'h84;
+		C = 8'h87;
+		D = 8'h84;
+		E = 8'h84;
+*/
 	always@(*)
 	begin
 		if((A>=B) & (A>=C) & (A>=D) & (A>=E))
 			mayor = A;
-		if((B>=A) & (B>=C) & (B>=D) & (B>=E))
+		else if((B>=A) & (B>=C) & (B>=D) & (B>=E))
 			mayor = B;
-		if((C>=A) & (C>=B) & (C>=D) & (C>=E))
+		else if((C>=A) & (C>=B) & (C>=D) & (C>=E))
 			mayor = C;
-		if((D>=A) & (D>=B) & (D>=C) & (D>=E))
+		else if((D>=A) & (D>=B) & (D>=C) & (D>=E))
 			mayor = D;
 		else 
 			mayor = E;

@@ -54,3 +54,5 @@ ModulosProyectoArqui1/isim/pn_info
 *.wcfg
 *.ngr
 ModulosProyectoArqui1/isim/Decode_isim_beh.exe.sim/tmp_save/_1
+*.gise
+ModulosProyectoArqui1/isim/processor_TB_isim_beh.exe.sim/tmp_save/_1
