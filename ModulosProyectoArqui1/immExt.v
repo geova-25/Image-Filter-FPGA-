@@ -29,7 +29,7 @@ module immExt(
 
 	always @*
 	if(selExt)
-		immediato = {6'b0,imm26};
+		immediato = {imm26[25],imm26[25],imm26[25],imm26[25],imm26[25],imm26[25],imm26};
 	else
 		immediato = {16'b0,imm16};
 
