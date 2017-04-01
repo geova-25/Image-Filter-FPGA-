@@ -38,7 +38,7 @@ module registro32bits(
 	
 	
 	//escritura 
-	always @(posedge clk)
+	always @(negedge clk)
 	begin
 		if(WEc & CSc)
 			Do=DinC;
