@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ImageFilter(
     input wire clk,
-	 input wire [31:0] vgaAddress,
+	 input wire [18:0] vgaAddress,
 	 output wire [7:0] ImageData
     /**output wire [31:0] salidaDoa,
     output wire [31:0] salidaDob,
