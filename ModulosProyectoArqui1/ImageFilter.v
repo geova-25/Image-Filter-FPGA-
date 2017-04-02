@@ -20,7 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ImageFilter(
     input wire clk,
-    output wire [31:0] salidaDoa,
+	 input wire [31:0] vgaAddress,
+	 output wire [7:0] ImageData
+    /**output wire [31:0] salidaDoa,
     output wire [31:0] salidaDob,
 	 output wire [31:0] salida_OP,
 	 output wire [31:0] salida_sel_ext,
@@ -29,6 +31,7 @@ module ImageFilter(
 	 output wire [31:0] salida_Rp,
 	 output wire [31:0] salida_Rs,
 	 output wire [31:0] salida_WE_C_wb,
+	 output wire [31:0] salida_WE_C_aux_deco,
 	 output wire [31:0] salida_Rg_wb,
 	 output wire [31:0] salida_Rg_deco,
 	 output wire [31:0] salida_Rg_exe,
@@ -47,7 +50,21 @@ module ImageFilter(
 	 output wire [31:0] salida_immediato_deco,
 	 output wire [31:0] salida_ALU_result_wb,
 	 output wire [31:0] salida_SEL_DAT_deco,
-	 output wire [31:0] salida_sel_c_wb
+	 output wire [31:0] salida_sel_c_wb,
+	 output wire  salida_N,
+	 output wire  salida_Z,
+	 output wire  salida_WE_V_wb,
+	 output wire [31:0] salida_ALU_result_mem,
+	 output wire [31:0] salida_Do_mem,
+	 output wire [31:0] salida_Dob_mem,
+	 output wire [31:0] salida_DoB8_wb,
+	 output wire [31:0] salida_cuarenta_exe,
+	 output wire [31:0] salida_cuarenta_deco,
+	 output wire [31:0] salida_DinBbyte_mem,
+	 output wire [31:0] salida_sel_pc,
+	 output wire [31:0] salida_COMPARA_deco,
+	 output wire [31:0] salida_cond_deco,
+	 output wire [31:0] salida_cond_exe**/
     );
 	 	
 	wire [31:0] Instruccion;
@@ -348,9 +365,11 @@ module ImageFilter(
 		.ALU_Result_In(ALU_result_mem),
 		.Rs(DinBbyte_mem),
 		.WE_mem(WE_mem_mem),
+		.vgaAdress(vgaAdress),
 		//salidas
 		.Do(Do_mem),
-		.Dob(Dob_mem)
+		.Dob(Dob_mem),
+		.ImageData(ImageData)
     );
 
 //---------------------------------------------------------------------------------------	
@@ -428,7 +447,7 @@ module ImageFilter(
     );
 	 
 	 
-	assign salidaDoa = DoA_deco;
+	/**assign salidaDoa = DoA_deco;
 	assign salidaDob = DoB_deco;
 	assign salida_OP = OpCode;
 	assign salida_sel_ext  = sel_ext;
@@ -456,5 +475,19 @@ module ImageFilter(
 	assign salida_ALU_result_wb = ALU_result_wb;	
 	assign salida_SEL_DAT_deco = SEL_DAT_deco;	
 	assign salida_sel_c_wb = sel_c_wb;	
+	assign salida_N = N;	
+	assign salida_Z = Z;
+	assign salida_WE_V_wb = WE_V_wb;
+	assign salida_Do_mem = Do_mem;
+	assign salida_Dob_mem = Dob_mem;
+	assign salida_ALU_result_mem = ALU_result_mem;
+	assign salida_DoB8_wb = DoB8_wb;
+	assign salida_cuarenta_exe = cuarenta_exe;
+	assign salida_DinBbyte_mem = DinBbyte_mem;
+	assign salida_sel_pc = sel_pc;
+	assign salida_WE_C_aux_deco = WE_C_aux_deco;
+	assign salida_COMPARA_deco = COMPARA_deco;
+	assign salida_cond_deco = cond_deco;
+	assign salida_cond_exe = cond_exe;**/
 	
 endmodule

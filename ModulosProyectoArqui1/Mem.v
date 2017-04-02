@@ -21,11 +21,12 @@
 module Mem(
 		input clk,
 		input [31:0] ALU_Result_In,
+		input [31:0] vgaAdress,
 		input [7:0] Rs,
 		input WE_mem,
 		output wire [31:0] Do,
-		output wire [7:0] Dob
-		
+		output wire [7:0] ImageData,
+		output wire [7:0] Dob		
     );
 	 
 	 parameter CUATRO = 32'd4;
@@ -38,7 +39,9 @@ module Mem(
 		.B(ALU_Result_In + 4), 
 		.Din(Rs), 
 		.Do(Do), 
-		.Dob(Dob)
+		.Dob(Dob),
+		.vgaAdress(vgaAdress),
+		.ImageData(ImageData)
 	);
 	
 	/*thirtyTwoBitsFullAdder sumador (

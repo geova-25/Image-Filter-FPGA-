@@ -23,12 +23,14 @@ module DataMemory(
 	 input clk,
     input [31:0] A,
     input [31:0] B,
+    input [31:0] vgaAdress,
     input [7:0] Din,
     output wire [31:0] Do,
+    output wire [7:0] ImageData,
     output wire [7:0] Dob
     );
 	 
-	 reg [7:0] DataMem[131072:0];
+	 reg [7:0] DataMem[5000:0];
 	 //reg [7:0] DataMem[127:0];	 
 	 integer i = 5'b0;
 	initial begin
@@ -57,6 +59,9 @@ module DataMemory(
 				DoReg = {DataMem[A],DataMem[A+1],DataMem[A+2],DataMem[A+3]};
 				DobReg =  DataMem[B];
 			end		
+
+	assign ImageData = DataMem[vgaAdress];
+		
 			
 	assign Do = DoReg;
 	assign Dob = DobReg;
