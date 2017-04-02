@@ -9,6 +9,9 @@ module control_pintado(
 	output reg [18:0] addres
 );
 
+initial begin
+	addres = 18'h28;
+end
 
 reg [7:0] salida = 8'b0;
 reg bandera = 1'b0;

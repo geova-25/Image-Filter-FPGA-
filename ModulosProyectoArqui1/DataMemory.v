@@ -26,15 +26,15 @@ module DataMemory(
     input [31:0] vgaAdress,
     input [7:0] Din,
     output wire [31:0] Do,
-    output wire [7:0] ImageData,
+    output reg [7:0] ImageData,
     output wire [7:0] Dob
     );
 	 
-	 reg [7:0] DataMem[5000:0];
-	 //reg [7:0] DataMem[127:0];	 
+	 //reg [7:0] DataMem[5000:0];
+	 reg [7:0] DataMem[1100:0];	 
 	 integer i = 5'b0;
 	initial begin
-	$readmemh("DataMemInit.txt",DataMem);
+	$readmemh("DataMemInit.txt",DataMem,0, 1100);
 		/**	for (i=0; i < 32; i=i+1)
         $display("%d:%h",i,DataMem[i]);	**/
 	end		 
@@ -60,8 +60,10 @@ module DataMemory(
 				DobReg =  DataMem[B];
 			end		
 
-	assign ImageData = DataMem[vgaAdress];
-		
+	always @(vgaAdress)		
+	begin
+			ImageData <= DataMem[vgaAdress];
+	end
 			
 	assign Do = DoReg;
 	assign Dob = DobReg;

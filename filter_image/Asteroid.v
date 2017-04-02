@@ -36,20 +36,21 @@ module Asteroid(
 	 wire [18:0]Adress_byte;
 	 wire CLK_25MHz;
 	 
-	ClockDivision25MHz divisor_de_tension(
+	ClockDivision25MHz divisor(
+	
 			.clk(clk),
 			.clk_25MHz(CLK_25MHz)
     );
 
 	 
 	 ImageFilter procesador(
-		.clk(clk_25MHz),
+		.clk(CLK_25MHz),
 		.vgaAddress(Adress_byte),
 		.ImageData(byte_In)
 	 );
 	 
 	 VGA_Interface moduloVGA(
-		.clk(clk_25MHz), 
+		.clk(CLK_25MHz), 
 		.reset(reset),
 		.sw(sw),
 		.byte_In(byte_In),

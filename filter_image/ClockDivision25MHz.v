@@ -20,11 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ClockDivision25MHz(
 			input clk,
-			output clk_25MHz
+			output reg clk_25MHz
     );
 	 
 	 	 	// señal de reloj
-		reg clk_25MHz;
+		initial begin
+			clk_25MHz = 0;
+		end
 		always @(posedge clk)
 		clk_25MHz <= ~clk_25MHz;
 	 
