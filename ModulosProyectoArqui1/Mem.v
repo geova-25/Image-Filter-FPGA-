@@ -21,7 +21,7 @@
 module Mem(
 		input clk,
 		input [31:0] ALU_Result_In,
-		input [31:0] vgaAdress,
+		input [18:0] vgaAdress,
 		input [7:0] Rs,
 		input WE_mem,
 		output wire [31:0] Do,

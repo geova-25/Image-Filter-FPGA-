@@ -4,7 +4,6 @@ module VGA_Interface(
 
     input wire clk, 
 	 input wire reset,
-    input wire [7:0] sw,
 	 input wire [7:0]byte_In,
 	 output wire [18:0]Adress_byte,
     output wire vga_hs,

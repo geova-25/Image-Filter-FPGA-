@@ -23,7 +23,7 @@ module DataMemory(
 	 input clk,
     input [31:0] A,
     input [31:0] B,
-    input [31:0] vgaAdress,
+    input [18:0] vgaAdress,
     input [7:0] Din,
     output wire [31:0] Do,
     output reg [7:0] ImageData,
@@ -31,14 +31,22 @@ module DataMemory(
     );
 	 
 	 //reg [7:0] DataMem[5000:0];
-	 reg [7:0] DataMem[1100:0];	 
+	 reg [7:0] DataMem[1063:0];	 
 	 integer i = 5'b0;
 	initial begin
-	$readmemh("DataMemInit.txt",DataMem,0, 1100);
-		/**	for (i=0; i < 32; i=i+1)
-        $display("%d:%h",i,DataMem[i]);	**/
+	$readmemh("DataMemInit.txt",DataMem,0, 1063);
+			for (i=0; i < 43; i=i+1)
+        $display("%d:%h",i,DataMem[i]);	
+		  $display("--------------------------------------------------------------------------------------------------------------------------s");
+$display("--------------------------------------------------------------------------------------------------------------------------s");
+$display("--------------------------------------------------------------------------------------------------------------------------s");
+$display("--------------------------------------------------------------------------------------------------------------------------s");
+$display("%d:%h",vgaAdress,vgaAdress);
 	end		 
-	 
+
+
+
+
 	 reg [31:0] DoReg;	 
 	 reg [7:0] DobReg;
 	 

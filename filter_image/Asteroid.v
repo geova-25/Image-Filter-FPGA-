@@ -21,7 +21,6 @@
 module Asteroid(
 	 input clk,
 	 input wire reset,
-    input wire [7:0] sw,
     output wire vga_hs,
 	 output wire vga_vs, 
 	 output wire solicitud,
@@ -45,14 +44,13 @@ module Asteroid(
 	 
 	 ImageFilter procesador(
 		.clk(CLK_25MHz),
-		.vgaAddress(Adress_byte),
+		.vgaAdress(Adress_byte),
 		.ImageData(byte_In)
 	 );
 	 
 	 VGA_Interface moduloVGA(
 		.clk(CLK_25MHz), 
 		.reset(reset),
-		.sw(sw),
 		.byte_In(byte_In),
 		.Adress_byte(Adress_byte),
 		.vga_hs(vga_hs),
