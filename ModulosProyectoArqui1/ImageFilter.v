@@ -21,53 +21,13 @@
 module ImageFilter(
     input wire clk,
 	 input wire [18:0] vgaAdress,
-	 output wire [7:0] ImageData
-    /**output wire [31:0] salidaDoa,
-    output wire [31:0] salidaDob,
-	 output wire [31:0] salida_OP,
-	 output wire [31:0] salida_sel_ext,
-	 output wire [31:0] salida_sel_a,
-	 output wire [31:0] salida_sel_b,
-	 output wire [31:0] salida_Rp,
-	 output wire [31:0] salida_Rs,
-	 output wire [31:0] salida_WE_C_wb,
-	 output wire [31:0] salida_WE_C_aux_deco,
-	 output wire [31:0] salida_Rg_wb,
-	 output wire [31:0] salida_Rg_deco,
-	 output wire [31:0] salida_Rg_exe,
-	 output wire [31:0] salida_Rg_mem,
-	 output wire [31:0] salida_DinC_wb,
-	 output wire [31:0] salida_result_exe,
-	 output wire [31:0] salida_Instruccion,
-	 output wire [31:0] salida_SELOP_A,
-	 output wire [31:0] salida_SELOP_B,
-	 output wire [31:0] salida_SELOP_A_deco,
-	 output wire [31:0] salida_SELOP_B_deco,
-	 output wire [31:0] salida_DoA_exe,
-	 output wire [31:0] salida_DoB_exe,
-	 output wire [31:0] salida_PROHIB_mem,
-	 output wire [31:0] salida_PROHIB_wb,
-	 output wire [31:0] salida_immediato_deco,
-	 output wire [31:0] salida_ALU_result_wb,
-	 output wire [31:0] salida_SEL_DAT_deco,
-	 output wire [31:0] salida_sel_c_wb,
-	 output wire  salida_N,
-	 output wire  salida_Z,
-	 output wire  salida_WE_V_wb,
-	 output wire [31:0] salida_ALU_result_mem,
-	 output wire [31:0] salida_Do_mem,
-	 output wire [31:0] salida_Dob_mem,
-	 output wire [31:0] salida_DoB8_wb,
-	 output wire [31:0] salida_cuarenta_exe,
-	 output wire [31:0] salida_cuarenta_deco,
-	 output wire [31:0] salida_DinBbyte_mem,
-	 output wire [31:0] salida_sel_pc,
-	 output wire [31:0] salida_COMPARA_deco,
-	 output wire [31:0] salida_cond_deco,
-	 output wire [31:0] salida_cond_exe**/
+	 output wire [7:0] ImageData,
+	 output wire [31:0]ALU_result_wb,
+	 output wire [31:0] Instruccion
+   
     );
 	 	
-	wire [31:0] Instruccion;
+	
 	wire [31:0] Pcmas4_Fetch;
 	wire [31:0] result_exe;
 	wire sel_pc;
@@ -152,7 +112,7 @@ module ImageFilter(
 	wire sel_dat_wb;
 	wire [7:0]Dob_wb; //byte de salida
 	wire [31:0]Do_wb; //palabra de salida
-	wire [31:0]ALU_result_wb;
+	
 
 	
 	 
@@ -447,47 +407,6 @@ module ImageFilter(
     );
 	 
 	 
-	/**assign salidaDoa = DoA_deco;
-	assign salidaDob = DoB_deco;
-	assign salida_OP = OpCode;
-	assign salida_sel_ext  = sel_ext;
-	assign salida_sel_a = sel_A;
-	assign salida_sel_b = sel_B;	
-	assign salida_Rp = Rp_deco;	
-	assign salida_Rs = Rs_deco;	
-	assign salida_WE_C_wb = WE_C_wb;	
-	assign salida_Rg_wb = Rg_wb;	
-	assign salida_Rg_deco = Rg_deco;	
-	assign salida_Rg_exe = Rg_exe;	
-	assign salida_Rg_mem = Rg_mem;	
-	assign salida_DinC_wb = DinC_wb;	
-	assign salida_result_exe = result_exe;	
-	assign salida_Instruccion = Instruccion;	
-	assign salida_SELOP_A = SELOP_A;	
-	assign salida_SELOP_B = SELOP_B;	
-	assign salida_SELOP_A_deco = SELOP_A_deco;	
-	assign salida_SELOP_B_deco = SELOP_B_deco;	
-	assign salida_DoA_exe = DoA_exe;	
-	assign salida_DoB_exe = DoB_exe;	
-	assign salida_PROHIB_mem = PROHIB_mem;	
-	assign salida_PROHIB_wb = PROHIB_wb;	
-	assign salida_immediato_deco = immediato_deco;	
-	assign salida_ALU_result_wb = ALU_result_wb;	
-	assign salida_SEL_DAT_deco = SEL_DAT_deco;	
-	assign salida_sel_c_wb = sel_c_wb;	
-	assign salida_N = N;	
-	assign salida_Z = Z;
-	assign salida_WE_V_wb = WE_V_wb;
-	assign salida_Do_mem = Do_mem;
-	assign salida_Dob_mem = Dob_mem;
-	assign salida_ALU_result_mem = ALU_result_mem;
-	assign salida_DoB8_wb = DoB8_wb;
-	assign salida_cuarenta_exe = cuarenta_exe;
-	assign salida_DinBbyte_mem = DinBbyte_mem;
-	assign salida_sel_pc = sel_pc;
-	assign salida_WE_C_aux_deco = WE_C_aux_deco;
-	assign salida_COMPARA_deco = COMPARA_deco;
-	assign salida_cond_deco = cond_deco;
-	assign salida_cond_exe = cond_exe;**/
+
 	
 endmodule

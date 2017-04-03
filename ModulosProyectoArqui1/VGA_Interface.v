@@ -62,8 +62,8 @@ module VGA_Interface(
 	
 	
    // output
-   assign r_out = (solicitud) ? r_reg : 7'b0;
-	assign g_out = (solicitud) ? g_reg : 7'b0;
-	assign b_out = (solicitud) ? b_reg : 7'b0;
+   assign r_out = (vga_blank) ? r_reg : 7'b0;
+	assign g_out = (vga_blank) ? g_reg : 7'b0;
+	assign b_out = (vga_blank) ? b_reg : 7'b0;
 
 endmodule 
