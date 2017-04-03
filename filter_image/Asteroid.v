@@ -54,7 +54,7 @@ module Asteroid(
 
 	 
 	 ImageFilter procesador(
-		.clk(clk_6MHz),
+		.clk(CLK_25MHz),
 		.vgaAdress(Adress_byte),
 		.ImageData(byte_In),
 		.ALU_result_wb(),

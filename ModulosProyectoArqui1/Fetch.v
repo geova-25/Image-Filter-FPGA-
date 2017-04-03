@@ -37,7 +37,7 @@ module Fetch(
 		.Y(salidaMux)
 	);
 	
-	InstructionMemory InstMem (
+	InstructionMemory2 InstMem (
 		.DIR(salidaPc), 
 		.DO(Instruccion)
 	);	
