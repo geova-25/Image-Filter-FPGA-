@@ -22,6 +22,9 @@ end
 
 reg [7:0] salida = 8'b0;
 reg bandera = 1'b0;
+reg [18:0] addres2 = 19'b0000000000000101000;
+wire [7:0] data2;
+rom rom_image_ori(addres2,data2);
 
 always @(posedge clk)
 begin	
@@ -32,14 +35,22 @@ begin
 			addres <= addres + 1'b1;
 			bandera <= 0;
 		end
+		else if (36 <= cur_x & cur_x <= 67) begin
+			salida <= data2;
+			//salida <= 8'b11111111;
+			addres2 <= addres2 + 1'b1;
+			bandera <= 0;
+		end
 		else begin
 			salida <= 8'b00000000;
 			addres <= addres;
+			addres2 <= addres2;
 			bandera <= 1;
 		end
 	end
 	else begin
 			addres <= 19'b0000000000000101000;
+			addres2 <= 19'b0000000000000101000;
 			bandera <= 1;
 			salida <= 8'b00000000;
 	end
